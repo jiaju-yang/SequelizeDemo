@@ -1,10 +1,12 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const db = require('./models')
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-
-app.listen(3000, function () {
-  console.log('App listening on port 3000!')
+db.sequelize.sync({ logging: console.log }).then(function () {
+  const app = express()
+  app.get('/', function (req, res) {
+    res.send('Hello World!')
+  })
+  app.listen(3000, function () {
+    console.log('App listening on port 3000!')
+  })
 })
