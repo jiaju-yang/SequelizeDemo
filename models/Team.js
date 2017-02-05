@@ -19,16 +19,15 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       paranoid: true,
+      timestamps: false,
       classMethods: {
         associate: function (models) {
-          Team.hasMany(models.Player,
+          Team.belongsToMany(models.Player,
             {
-              as: 'players',
+              through: models.Service,
               constraints: false,
-              foreignKey: {
-                name: 'teamId',
-                allowNull: false
-              }
+              foreignKey: 'teamId',
+              allowNull: false
             })
         }
       }

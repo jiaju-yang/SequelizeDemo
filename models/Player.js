@@ -22,7 +22,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       // freezeTableName: true,
-      paranoid: true,
+      timestamps: false,
+      // paranoid: true,
       // hooks: {
       //   afterCreate: function (question, options) {
       //     //...
@@ -30,14 +31,12 @@ module.exports = function (sequelize, DataTypes) {
       // },
       classMethods: {
         associate: function (models) {
-          Player.belongsTo(models.Team,
+          Player.belongsToMany(models.Team,
             {
-              as: 'team',
+              through: models.Service,
               constraints: false,
-              foreignKey: {
-                name: 'teamId',
-                allowNull: false
-              }
+              foreignKey: 'playerId',
+              allowNull: false
             })
         }
       }
