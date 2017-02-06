@@ -20,7 +20,12 @@ router.delete('/:id', function (req, res) {
 
 router.get('/:id', function (req, res) {
   response.get(res, models.Player.findById(
-    req.params.id
+    req.params.id, {
+      include: [{
+        model: models.Team,
+        as: 'team'
+      }]
+    }
   ))
 })
 

@@ -31,11 +31,11 @@ module.exports = function (sequelize, DataTypes) {
       // },
       classMethods: {
         associate: function (models) {
-          Player.belongsToMany(models.Team,
+          Player.belongsTo(models.Team,
             {
-              through: models.Service,
+              as: 'team',
               constraints: false,
-              foreignKey: 'playerId',
+              foreignKey: 'teamId',
               allowNull: false
             })
         }

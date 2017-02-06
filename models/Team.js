@@ -22,9 +22,9 @@ module.exports = function (sequelize, DataTypes) {
       timestamps: false,
       classMethods: {
         associate: function (models) {
-          Team.belongsToMany(models.Player,
+          Team.hasMany(models.Player,
             {
-              through: models.Service,
+              as: 'players',
               constraints: false,
               foreignKey: 'teamId',
               allowNull: false
