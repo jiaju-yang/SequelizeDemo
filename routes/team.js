@@ -39,10 +39,13 @@ router.delete('/:id', function (req, res) {
 
 router.get('/:id', function (req, res) {
   response.get(res, models.Team.findById(
-    req.params.id, {
+    req.params.id,
+    {
+      attributes: ['id', 'name', 'area', 'establishedAt'],
       include: [{
         model: models.Player,
-        as: 'players'
+        as: 'players',
+        attributes: ['id', 'age', [models.sequelize.fn('CONCAT', models.sequelize.col('firstName'), ' ', models.sequelize.col('lastName')), 'name']]
       }]
     }
   ))
